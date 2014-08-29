@@ -1,8 +1,7 @@
 <?php
 
+include 'view/topo.php';
 
-    include 'view/top.php';
+include 'view/conteudo.php';
 
-    include 'view/content.php';
-    
-    include 'view/footer.php';
+include 'view/rodape.php';

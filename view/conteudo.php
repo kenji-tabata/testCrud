@@ -63,15 +63,6 @@
             </section>
             <section id="listar">
                 <h1>Listar Usuários</h1>
-                <?php
-                    $sql = "select * from pesq_main";
-                    $result = mysql_query($sql,$con);
-                    
-                    while($consulta = mysql_fetch_array($result)){
-                        echo "$consulta[nome]";
-                    }
-                    mysql_free_result($result); 
-                    mysql_close($conecta); 
-                ?>
+                
             </section>
         </div>
