@@ -1,16 +1,12 @@
 <?php
-
-define('DB_SERVER', 'localhost');
-define('DB_NAME', 'test_dom');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '1234');
-
-class conexao {
-    var $banco, $conexao;
-    public function __construct($servidor,$nome_bd,$usuario,$senha){
-        $this->conexao = mysql_connect($servidor,$usuario,$senha);
-        $this->banco = mysql_select_db($nome_bd,$this->conexao);
+    $conecta = mysql_connect("localhost", "root", "1234");
+    mysql_select_db("test_dom", $conecta);
+    
+    if(mysqli_connect_errno()){
+        echo "Erro ao conectar ao banco de dados: " . mysqli_connect_error();
     }
     
-    public function 
-}
+    mysql_query("SET NAMES 'utf8'");
+    mysql_query('SET character_set_connection=utf8');
+    mysql_query('SET character_set_client=utf8');
+    mysql_query('SET character_set_results=utf8');
