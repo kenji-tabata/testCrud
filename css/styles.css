@@ -32,9 +32,6 @@ section{
     width: 850px;
     float: left;
 }
-#cadastro, #listar{
-    display: none;
-}
 .rotulo{
     width: 175px;
     float: left;
