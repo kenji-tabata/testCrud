@@ -1,13 +1,9 @@
 <?php
 
-$conecta = mysql_connect("localhost", "root", "1234");
-mysql_select_db("test_dom", $conecta);
+$conecta = new mysqli("localhost", "root", "1234","test_dom");
 
-if (!$conecta) {
-    die("<h1>A conexão com o banco falhou!</h1>");
+if (mysqli_connect_errno()) {
+    trigger_error(mysqli_connect_error());
 }
 
-mysql_query("SET NAMES 'utf8'");
-mysql_query('SET character_set_connection=utf8');
-mysql_query('SET character_set_client=utf8');
-mysql_query('SET character_set_results=utf8');
+$conecta->set_charset('utf8');

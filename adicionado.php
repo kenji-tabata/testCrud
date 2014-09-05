@@ -8,8 +8,12 @@ include 'includes/topo.php';
             <li><a href="listar.php">Listar pesquisado</a></li>
         </ul>
     </nav>
-    <section id="index">
+    <section id="adicionado">
+        <?php
+        include "functions/add_pesq_main.php";
+        ?>
     </section>
+    
 </div>
 
 <?php

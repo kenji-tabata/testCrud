@@ -1,10 +1,10 @@
 <?php
-include 'conexao.php';
+require 'conexao.php';
 
-$sql = "SELECT * FROM pesq_main";
-$result = mysql_query($sql, $conecta);
+$sqlSelect = "SELECT * FROM pesq_main";
+$querySelect = $conecta->query($sqlSelect);
 
-echo "<table>"
+echo "<table border='1px'>"
  . "<tr>"
  . "<th>ID</th>"
  . "<th>Nome</th>"
@@ -13,23 +13,30 @@ echo "<table>"
  . "<th>Cargo</th>"
  . "<th>Status</th>"
  . "<th>Oculto</th>"
+ . "<th>OP</th>"
  . "</tr>";
-while ($consulta = mysql_fetch_array($result)) {
-    if ($consulta[oculto] == 0) {
-        $oculto = "Sim";
+while ($consulta = $querySelect->fetch_assoc()) {
+    
+    extract($consulta);
+    
+    if ($oculto == 0) {
+        $estaOculto = "Sim";    
     } else {
-        $oculto = "Não";
+        $estaOculto = "Não";
     }
     echo "<tr>"
-    . "<td>$consulta[id]</td>"
-    . "<td>$consulta[nome]</td>"
-    . "<td>$consulta[sexo]</td>"
-    . "<td>$consulta[cpf]</td>"
-    . "<td>$consulta[cargo]</td>"
-    . "<td>$consulta[status]</td>"
-    . "<td>$oculto</td>"
+    . "<td>{$id}</td>"
+    . "<td>{$nome}</td>"
+    . "<td>{$sexo}</td>"
+    . "<td>{$cpf}</td>"
+    . "<td>{$cargo}</td>"
+    . "<td>{$status}</td>"
+    . "<td>{$estaOculto}</td>"
+    . "<td>"
+            . "<a href='functions/del_pesq_main.php?id={$id}' onclick='return confirm(\"Deseja realmente excluir o presquisado?\")' title='Deletar' ><img src='imagens/del.png' title='Deletar' alt='Deletar'></a>"
+            . "<a href='editar.php?id={$id}' title='Editar'><img src='imagens/edit.png' title='Editar' alt='Editar'></a>"
+    . "</td>"
     . "</tr>";
 }
 echo "</table>";
-mysql_free_result($result);
-mysql_close($conecta);
+$conecta->close();
