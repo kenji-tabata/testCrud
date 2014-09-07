@@ -11,14 +11,14 @@ include 'includes/topo.php';
    
     <section id="edicao">
         <h1>Editar Pesquisado</h1>
-        <form name="editar" action="edit_pesq_main.php" method="POST">
+        <form name="editar" action="editado.php" method="POST">
             <?php include 'functions/show_pesq_main.php' ;?>
             <fieldset>
                 <legend>Dados Pessoais</legend>
                 <div class="rotulo"><label for="oculto">Oculto: </label></div>
                 <div class="entrada">
-                    <input type="radio" id="oculto" name="oculto" value="0" checked> Sim
-                    <input type="radio" name="oculto" value="1"> Não
+                    <input type="radio" id="oculto" name="oculto" value="0" checked="<?php echo $oculto == "0" ? "checked" : ""; ?>"> Sim
+                    <input type="radio" name="oculto" value="1" checked="<?php echo $oculto == "1" ? "checked" : ""; ?>"> Não
                 </div>
                 <div class="rotulo"><label for="nome">Nome: </label></div>
                 <div class="entrada"><input type="text" id="nome" name="nome" placeholder="Nome completo" value="<?php echo "$nome"; ?>"/></div>
