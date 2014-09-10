@@ -3,7 +3,7 @@
 /**
  * DELETE
  */
-if ($_GET) {
+if (isset($_GET['id']) ? $_GET['id'] : null) {
     require 'conexao.php';
 
     $sqlDelete = "DELETE FROM pesq_main WHERE id = ?";

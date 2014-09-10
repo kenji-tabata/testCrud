@@ -10,9 +10,43 @@ include '../includes/topo.php';
     </nav>
     <section id="index">
         <h1>Listar Pesquisados</h1>
-        <?php echo $lista ?>
+        <table border="1px">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Sexo</th>
+                <th>CPF</th>
+                <th>Cargo</th>
+                <th>Status</th>
+                <th>Oculto</th>
+                <th>OP</th>
+            </tr>
+            <?php foreach ($view->pesquisados as $pesquisado): ?>
+                <tr>
+                    <td><?php echo $pesquisado->id; ?></td>
+                    <td><?php echo $pesquisado->nome; ?></td>
+                    <td><?php echo $pesquisado->sexo; ?></td>
+                    <td><?php echo $pesquisado->cpf; ?></td>
+                    <td><?php echo $pesquisado->cargo; ?></td>
+                    <td><?php echo $pesquisado->status; ?></td>
+                    <td><?php echo ($pesquisado->oculto == 0) ? "Não" : "Sim"; ?></td>
+                    <td>
+                        <a href="../controllers/pesq-index-action.php?id=<?php echo $pesquisado->id; ?>" 
+                           onclick="return confirm('Deseja realmente excluir o pesquisado?')" title="Deletar" >
+                            <img src="../imagens/del.png" title="Deletar" alt="Deletar">
+                        </a>
+                        <a href="pesq-form.php?id=<?php echo $pesquisado->id; ?>" title="Editar">
+                            <img src="../imagens/edit.png" title="Editar" alt="Editar">
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </table>
     </section>
 </div>
 
+<!-- chame aqui seu js-->
+
 <?php
 include '../includes/rodape.php';
+
