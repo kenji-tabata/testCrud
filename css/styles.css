@@ -55,3 +55,14 @@ input{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
 }
+.toggle{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.toggleDiv{
+    display: none;
+}
+
+#erroLog{
+    margin-bottom: 10px;
+}
