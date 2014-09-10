@@ -3,8 +3,9 @@
     <head>
         <title>CRUD</title>
         <meta charset="utf-8"/>
-        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
-        <script src="js/functions.js" type="text/javascript"></script>
+        <link type="text/css" href="../css/styles.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../js/functions.js"></script>
+        <script type="text/javascript" src="../js/jquery.js"></script>
     </head>
     <body>
         <header>
