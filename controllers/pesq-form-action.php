@@ -7,11 +7,11 @@
  */
 
 // Obtem os dados do pesquisado pelo metodo POST
-$oculto = $_POST['oculto'];
-$nome = $_POST['nome'];
-$sexo = $_POST['sexo'];
-$cpf = $_POST['cpf'];
-$cargo = $_POST['cargo'];
+$oculto = isset($_POST['oculto']) ? $_POST['oculto'] : null;
+$nome   = isset($_POST['nome'])   ? $_POST['nome'] : null;
+$sexo   = isset($_POST['sexo'])   ? $_POST['sexo'] : null;
+$cpf    = isset($_POST['cpf'])    ? $_POST['cpf'] : null;
+$cargo  = isset($_POST['cargo'])  ? $_POST['cargo'] : null;
 
 // Variavel status com o valor padrao 
 $status = "Não preenchido";
