@@ -3,22 +3,13 @@
 /**
  * Carrega do dados do banco para a VIEW
  */
-
-require 'conexao.php';
-
-$sqlSelect = "SELECT * FROM pesq_main ORDER BY id DESC";
-$querySelect = $conecta->query($sqlSelect);
-
-$pesquisados = array();
-while ($pesquisado = $querySelect->fetch_object()) {
-    $pesquisados[$pesquisado->id] = $pesquisado;
-}
-
-$conecta->close();
+include "../models/pesqMain.class.php";
+$pesqMain = new pesqMain;
+$pesqMain->listarPesq();
 
 /**
  * View
  */
 $view = new stdClass();
-$view->pesquisados = $pesquisados;
+$view->pesquisados = $pesqMain->pesquisados;
 require "../views/pesq-index.php";

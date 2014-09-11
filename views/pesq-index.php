@@ -1,6 +1,4 @@
-<?php
-include '../includes/topo.php';
-?>
+<?php include '../includes/topo.php'; ?>
 <div id="content_main">
     <nav>
         <ul>
@@ -32,7 +30,7 @@ include '../includes/topo.php';
                     <td><?php echo ($pesquisado->oculto == 0) ? "Não" : "Sim"; ?></td>
                     <td>
                         <a href="../controllers/pesq-index-action.php?id=<?php echo $pesquisado->id; ?>" 
-                           onclick="return confirm('Deseja realmente excluir o pesquisado?')" title="Deletar" >
+                           onclick="javascript:confirmarDel();" title="Deletar" >
                             <img src="../imagens/del.png" title="Deletar" alt="Deletar">
                         </a>
                         <a href="pesq-form.php?id=<?php echo $pesquisado->id; ?>" title="Editar">
@@ -45,7 +43,7 @@ include '../includes/topo.php';
     </section>
 </div>
 
-<!-- chame aqui seu js-->
+<script type="text/javascript" src="../controllers/pesq-index.js"></script>
 
 <?php
 include '../includes/rodape.php';
