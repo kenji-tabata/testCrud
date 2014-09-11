@@ -4,7 +4,6 @@
         <title>CRUD</title>
         <meta charset="utf-8"/>
         <link type="text/css" href="../css/styles.css" rel="stylesheet"/>
-        <script type="text/javascript" src="../js/functions.js"></script>
         <script type="text/javascript" src="../js/jquery.js"></script>
     </head>
     <body>
