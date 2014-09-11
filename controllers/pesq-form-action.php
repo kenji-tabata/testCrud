@@ -6,6 +6,8 @@
  * e mostra erros
  */
 
+require "../models/pesqMain.class.php";
+
 // Obtem os dados do pesquisado pelo metodo POST
 $oculto = isset($_POST['oculto']) ? $_POST['oculto'] : null;
 $nome   = isset($_POST['nome'])   ? $_POST['nome'] : null;
@@ -28,10 +30,16 @@ $campo_branco = "";
  */
 $errorString = "";
 
+
+//$validor = new Validador;
+// ValidadorTest.php        
+
+
 /**
  * Verifica se o campo nome esta preenchido, caso esteja em branco incrementa o $qtd_erro e adiciona o nome do campo
  * ao $campo_branco
  */
+//if ($validor->ehVazio($nome)) {
 if ($nome == "" || $nome == null) {
     $qtd_erro += 1;
     $campo_branco .= "Nome ";
@@ -41,6 +49,7 @@ if ($nome == "" || $nome == null) {
  * Verifica se o campo CPF esta preenchido, caso esteja em branco incrementa o $qtd_erro e adiciona o nome do campo
  * ao $campo_branco
  */
+//if ($validor->validaCPF($cpf)) {
 if (!preg_match("/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/", $cpf)) {
     $qtd_erro += 1;
     $campo_branco .= "CPF ";
@@ -50,6 +59,7 @@ if (!preg_match("/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/", $cpf)) {
  * Verifica se o campo cargo esta preenchido, caso esteja em branco incrementa o $qtd_erro e adiciona o nome do campo
  * ao $campo_branco
  */
+//if ($validor->ehVazio($cpf)) {
 if ($cargo == "" || $cargo == null) {
     $qtd_erro += 1;
     $campo_branco .= "Cargo ";
@@ -59,23 +69,8 @@ if ($cargo == "" || $cargo == null) {
  * update
  */
 if ($qtd_erro == 0 && isset($_GET['id'])) {
-    $id = $_POST['id'];
-    require 'conexao.php';
-
-    $sqlUpdate = "UPDATE pesq_main SET status= ?, oculto= ?, nome= ?, sexo= ?, cpf= ?, cargo= ? WHERE id= ?";
-
-    if ($queryUpdate = $conecta->prepare($sqlUpdate)) {
-        $queryUpdate->bind_param("ssssssi", $status, $oculto, $nome, $sexo, $cpf, $cargo, $id);
-        if ($queryUpdate->execute()) {
-            $queryUpdate->close();
-        } else {
-            die("Nao foi possivel alterar os dados do pesquisado!");
-        }
-    } else {
-        die("Nao foi possivel executar o servico!");
-    }
-
-    $conecta->close();
+    $pesqMain = new pesqMain;
+    $pesqMain->salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo);
     header('location: ../controllers/pesq-index.php');
 }
 
@@ -83,23 +78,8 @@ if ($qtd_erro == 0 && isset($_GET['id'])) {
  * insert
  */
 elseif ($qtd_erro == 0) {
-    require 'conexao.php';
-
-    $sqlInsert = "INSERT INTO pesq_main (status,oculto,nome,sexo,cpf,cargo) values (?, ?, ?, ?, ?, ?)";
-
-    if ($queryInsert = $conecta->prepare($sqlInsert)) {
-        $queryInsert->bind_param("ssssss", $status, $oculto, $nome, $sexo, $cpf, $cargo);
-
-        if ($queryInsert->execute()) {
-            $queryInsert->close();
-        } else {
-            die("Nao foi possivel adicionar o pesquisado!");
-        }
-    } else {
-        die("Nao foi possivel executar o servico!");
-    }
-
-    $conecta->close();
+    $pesqMain = new pesqMain;
+    $pesqMain->salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo);
     header('location: ../controllers/pesq-index.php');
 }
 

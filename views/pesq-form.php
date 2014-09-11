@@ -43,7 +43,6 @@
                 <div class="entrada">
                     <input type="text" id="cargo" name="cargo" placeholder="Cargo da Empresa" 
                            value="<?php echo $view->pesquisado->cargo; ?>"/></div>
-                <input type="hidden" name="id" id="id" value="<?php echo $view->pesquisado->idPesq; ?>" />
             </fieldset>
             <fieldset>
                 <legend id="btnContato" class="toggle" onclick="mostrar('contato', 'btnContato');">Contatos Pessoais</legend>
@@ -86,6 +85,8 @@
         </form>
     </section>
 </div>
+
+<script type="text/javascript" src="pesq-form.js"></script>
 
 <?php
 include '../includes/rodape.php';

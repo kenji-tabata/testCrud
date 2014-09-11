@@ -9,21 +9,19 @@ $idPesq = isset($_GET['id']) ? $_GET['id'] : null;
 # Update
 if ($idPesq) {
 
-    # Recupera os dados para a view
-    require 'conexao.php';
-
-    $sqlShow   = "SELECT id, nome, sexo, cpf, cargo, status, oculto FROM pesq_main WHERE id = $idPesq LIMIT 0,1";
-    $queryShow = $conecta->query($sqlShow);
-    $rowQuery  = $queryShow->fetch_assoc();
-
-    extract($rowQuery);
-
-    $queryShow->free();
-    $conecta->close();
+    include "../models/pesqMain.class.php";
+    $pesqMain = new pesqMain;
+    $pesqMain->carregaPesq($idPesq);
 
     # Inicializando variaveis
     $urlAction = "../controllers/pesq-form-action.php?id=$idPesq";
     
+    # Inicializa as variaveis com os dados do pesquisado
+    $oculto = $pesqMain->pesquisado->oculto;
+    $nome  = $pesqMain->pesquisado->nome;
+    $sexo = $pesqMain->pesquisado->sexo;
+    $cpf = $pesqMain->pesquisado->cpf;
+    $cargo = $pesqMain->pesquisado->cargo;
 }
 # Insert
 else {
@@ -31,6 +29,7 @@ else {
     # Inicializaçao dos controles
     $urlAction = "../controllers/pesq-form-action.php";
     
+    # Inicializa as variaveis com dados padroes
     $oculto = 0;
     $nome  = "";
     $sexo   = "M";
