@@ -2,17 +2,18 @@
 <div id="content_main">
     <nav>
         <ul>
-            <li><a href="pesq-form.php">Cadastrar novo pesquisado</a></li>
+            <li><a href="pesq-form.php">Inserir pesquisado</a></li>
             <li><a href="pesq-index.php">Listar pesquisado</a></li>
         </ul>
     </nav>
     <section id="cadastro">
+ <!--onsubmit="return validar(this);"-->
+        <h1><?php echo ($idPesq) ? "Alterar Pesquisado" : "Inserir Pesquisados"; ?></h1>
 
-        <h1><?php echo ($idPesq) ? "Alterar Pesquisado" : "Inserir de Pesquisados"; ?></h1>
-
-        <form name="form" id="form" action="<?php echo $view->urlAction ?>" method="post" onsubmit="return validar(this);">
+        <form name="form" id="form" action="<?php echo $view->urlAction ?>" method="post">
             <fieldset>
                 <legend>Dados Pessoais</legend>
+                <p><?php echo $view->msgErro; ?></p>
                 <div class="rotulo"><label for="oculto">Oculto: </label></div>
                 <div class="entrada">
                     <label for="sim">

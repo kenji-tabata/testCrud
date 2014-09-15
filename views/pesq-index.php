@@ -2,7 +2,7 @@
 <div id="content_main">
     <nav>
         <ul>
-            <li><a href="pesq-form.php">Cadastrar novo pesquisado</a></li>
+            <li><a href="pesq-form.php">Inserir pesquisado</a></li>
             <li><a href="pesq-index.php">Listar pesquisado</a></li>
         </ul>
     </nav>
