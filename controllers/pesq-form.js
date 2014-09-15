@@ -1,21 +1,40 @@
-function mostrar(tipo1,tipo2){
-    document.getElementById(tipo1).style.display="block";
+/**
+ * Recebe como parametro o idBlock e atribui ao elemento o display:block (Torna visivel o elemento)
+ * Recebe como parametro o idLink e muda a funcao do onclick do elemento
+ * @param {type} idBlock
+ * @param {type} idLink
+ * @returns {undefined}
+ */
+function mostrar(idBlock,idLink){
+    document.getElementById(idBlock).style.display="block";
     if(tipo1 == "contato"){
-        document.getElementById(tipo2).setAttribute('onclick', 'esconder("contato","btnContato")');
+        document.getElementById(idLink).setAttribute('onclick', 'esconder("contato","btnContato")');
     }else{
-        document.getElementById(tipo2).setAttribute('onclick', 'esconder("empresa","btnEmpresa")');
+        document.getElementById(idLink).setAttribute('onclick', 'esconder("empresa","btnEmpresa")');
     }
 }
 
-function esconder(tipo1,tipo2){
-    document.getElementById(tipo1).style.display="none";
+/**
+ * Recebe como parametro o idBlock e atribui ao elemento o display:none (Esconde o elemento)
+ * Recebe como parametro o idLink e muda a funcao do onclick do elemento
+ * @param {type} idBlock
+ * @param {type} idLink
+ * @returns {undefined}
+ */
+function esconder(idBlock,idLink){
+    document.getElementById(idBlock).style.display="none";
     if(tipo1 == "contato"){
-        document.getElementById(tipo2).setAttribute('onclick', 'mostrar("contato","btnContato")');
+        document.getElementById(idLink).setAttribute('onclick', 'mostrar("contato","btnContato")');
     }else{
-        document.getElementById(tipo2).setAttribute('onclick', 'mostrar("empresa","btnEmpresa")');
+        document.getElementById(idLink).setAttribute('onclick', 'mostrar("empresa","btnEmpresa")');
     }
 }
 
+/**
+ * Valida os campos do formulario do pesquisado com JavaScript
+ * @param {type} cadastro
+ * @returns {Boolean}
+ */
 function validar(cadastro){
     if(cadastro.nome.value == ""){
         alert('Preenche com o seu nome!');

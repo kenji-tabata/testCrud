@@ -1,75 +1,61 @@
 <?php
 /**
- * Recuperar dados do formulario de pesquisado e efetua UPDATE ou INSERT e
- * 
- * valida dados 
+ * Recuperar dados do formulário de pesquisado e efetua UPDATE ou INSERT e
+ *
+ * valida dados
  * e mostra erros
  */
 
-require "../models/pesqMain.class.php";
-
-// Obtem os dados do pesquisado pelo metodo POST
+# Atribui os dados do pesquisado pelo metodo POST
 $oculto = isset($_POST['oculto']) ? $_POST['oculto'] : null;
 $nome   = isset($_POST['nome'])   ? $_POST['nome'] : null;
 $sexo   = isset($_POST['sexo'])   ? $_POST['sexo'] : null;
 $cpf    = isset($_POST['cpf'])    ? $_POST['cpf'] : null;
 $cargo  = isset($_POST['cargo'])  ? $_POST['cargo'] : null;
 
-// Variavel status com o valor padrao 
+# Define STATUS do formulário do pesquisado como Não preenchido
 $status = "Não preenchido";
 
-// Inicializa o contador de quantidade de erros 
-$qtd_erro = 0;
+# Inicializa as variáveis da mensagem de erro
+$qtdVazio = 0;
+$inputVazio = null;
 
-// Inicializa em branco a variavel que armazenara o(s) nome(s) do(s) campo(s) que nao esta(ao) preenchido(s)
-$campo_branco = "";
-
-/**
- * Inicializa o log de erros em branco, esta variavel e utilizado para mostrar quais campos nao foram preenchidos
- * no proprio html quando o JavaScript estiver desativado ou falhar. 
- */
-$errorString = "";
-
-
-//$validor = new Validador;
-// ValidadorTest.php        
-
+# Instância o objeto validador
+require "../models/Validador.class.php";
+$validador = new Validador;
 
 /**
- * Verifica se o campo nome esta preenchido, caso esteja em branco incrementa o $qtd_erro e adiciona o nome do campo
- * ao $campo_branco
+ * Valida o campo Nome
  */
-//if ($validor->ehVazio($nome)) {
-if ($nome == "" || $nome == null) {
-    $qtd_erro += 1;
-    $campo_branco .= "Nome ";
+if ($validador->ehVazio($nome)) {
+    $inputVazio[$qtdVazio] = "Nome";
+    $qtdVazio += 1;
 }
 
 /**
- * Verifica se o campo CPF esta preenchido, caso esteja em branco incrementa o $qtd_erro e adiciona o nome do campo
- * ao $campo_branco
+ * Valida o campo CPF
  */
-//if ($validor->validaCPF($cpf)) {
-if (!preg_match("/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/", $cpf)) {
-    $qtd_erro += 1;
-    $campo_branco .= "CPF ";
+if ($validador->validaCPF($cpf)) {
+    $inputVazio[$qtdVazio]= "CPF";
+    $qtdVazio += 1;
 }
 
 /**
- * Verifica se o campo cargo esta preenchido, caso esteja em branco incrementa o $qtd_erro e adiciona o nome do campo
- * ao $campo_branco
+ * Valida o campo Cargo
  */
-//if ($validor->ehVazio($cpf)) {
-if ($cargo == "" || $cargo == null) {
-    $qtd_erro += 1;
-    $campo_branco .= "Cargo ";
+if ($validador->ehVazio($cargo)) {
+    $inputVazio[$qtdVazio] = "Cargo";
+    $qtdVazio += 1;
 }
+
+# Instancia o objeto pesquisado
+require "../models/PesqMain.class.php";
+$pesqMain = new PesqMain;
 
 /**
  * update
  */
-if ($qtd_erro == 0 && isset($_GET['id'])) {
-    $pesqMain = new pesqMain;
+if ($qtdVazio == 0 && isset($_GET['id'])) {
     $pesqMain->salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo);
     header('location: ../controllers/pesq-index.php');
 }
@@ -77,8 +63,7 @@ if ($qtd_erro == 0 && isset($_GET['id'])) {
 /**
  * insert
  */
-elseif ($qtd_erro == 0) {
-    $pesqMain = new pesqMain;
+elseif ($qtdVazio == 0) {
     $pesqMain->salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo);
     header('location: ../controllers/pesq-index.php');
 }
@@ -87,30 +72,8 @@ elseif ($qtd_erro == 0) {
  * Erros
  */
 else {
-    /**
-     * Caso $qtd_erro for igual ou maior que 1, mostra quais os campos nao foram preenchidos
-     */
-    if ($qtd_erro == 1) {
-        $errorString = "O campo " . $campo_branco . " não foi preenchido ou está preenchido de forma incorreta, volte e preencha novamente);";
-        header('location: pesq_form.php');
-    } else {
-        // Divide a string para obter os nomes dos campos que nao foram preenchidos 
-        $campo_erro = explode(" ", $campo_branco);
-        $cont_erro = 0;
-        $errorString = "Os campos ";
-        for ($erros = 1; $erros <= $qtd_erro; $erros++) {
-            if ($erros == 1) {
-                $errorString .= "$campo_erro[$cont_erro]";
-                $cont_erro++;
-            } elseif ($erros < $qtd_erro) {
-                $errorString .= ", $campo_erro[$cont_erro]";
-                $cont_erro++;
-            } else {
-                $errorString .= " e $campo_erro[$cont_erro]";
-                $cont_erro++;
-            }
-        }
-        $errorString .= " não foram preenchidos ou estão preenchidos de forma incorreta, retorne e preencha novamente.";
-        header('location: pesq-form.php');
-    }
+    # Inicia uma sessão para gravar a mensagem de erro
+    session_start("errorLog");
+    $_SESSION["msgErro"] = $validador->camposVazios($qtdVazio,$inputVazio);
+    header('location: pesq-form.php');
 }
