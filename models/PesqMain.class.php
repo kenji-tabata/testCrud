@@ -1,6 +1,8 @@
 <?php
-
-class pesqMain {
+/**
+ * Model do pesquisado - manipulacao dos registros
+ */
+class PesqMain {
 
     /**
      * Carrega todos os registros da Tabela pesq_main
@@ -22,7 +24,7 @@ class pesqMain {
     }
 
     /**
-     *  Recupera os dados para a view
+     *  Recupera os dados para a editar do pesquisado
      */
     function carregaPesq($idPesq) {
         require 'conexao.php';
@@ -39,19 +41,28 @@ class pesqMain {
     }
 
     /**
-     * Insert ou Update pesquisado
+     * Insert ou Update do pesquisado
+     * @param type $status
+     * @param type $oculto
+     * @param type $nome
+     * @param type $sexo
+     * @param type $cpf
+     * @param type $cargo
      */
     function salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo) {
         require 'conexao.php';
 
+        # Se o id do pesquisado existir atualiza o registro
         if ($_GET['id']) {
             $sql = "UPDATE pesq_main SET status= ?, oculto= ?, nome= ?, sexo= ?, cpf= ?, cargo= ? WHERE id= ?";
             if ($query = $conecta->prepare($sql)) {
                 $query->bind_param("ssssssi", $status, $oculto, $nome, $sexo, $cpf, $cargo, $_GET['id']);
             } else {
-                die("Nao foi possivel executar o servico!");
+                die("Nao foi possivel atualizar o pesquisado!");
             }
-        } else {
+        }
+        # Caso o id do pesquisado nao existir insira um novo registro
+        else {
             $sql = "INSERT INTO pesq_main (status,oculto,nome,sexo,cpf,cargo) values (?, ?, ?, ?, ?, ?)";
             if ($query = $conecta->prepare($sql)) {
                 $query->bind_param("ssssss", $status, $oculto, $nome, $sexo, $cpf, $cargo);
@@ -60,6 +71,7 @@ class pesqMain {
             }
         }
 
+        # Executa a query SQL se nao ocorrer nenhum erro  
         if ($query->execute()) {
             $query->close();
         } else {
@@ -70,7 +82,7 @@ class pesqMain {
     }
 
     /**
-     * Delete pesquisado
+     * Remove o registro do pesquisado
      */
     function deletarPesq() {
         require 'conexao.php';
