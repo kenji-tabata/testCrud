@@ -4,7 +4,7 @@
  * DELETE
  */
 if (isset($_GET['id'])) {
-    include "../models/pesqMain.class.php";
-    $pesqMain = new pesqMain;
+    include "../models/PesqMain.class.php";
+    $pesqMain = new PesqMain;
     $pesqMain->deletarPesq();
 }

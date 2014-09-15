@@ -3,8 +3,8 @@
 /**
  * Carrega do dados do banco para a VIEW
  */
-include "../models/pesqMain.class.php";
-$pesqMain = new pesqMain;
+include "../models/PesqMain.class.php";
+$pesqMain = new PesqMain;
 $pesqMain->listarPesq();
 
 /**
