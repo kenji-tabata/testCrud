@@ -29,11 +29,11 @@
                     <td><?php echo $pesquisado->status; ?></td>
                     <td><?php echo ($pesquisado->oculto == 0) ? "Não" : "Sim"; ?></td>
                     <td>
-                        <a href="../controllers/pesq-index-action.php?id=<?php echo $pesquisado->id; ?>" 
-                           onclick="javascript:confirmarDel();" title="Deletar" >
+                        <a href="/deletar(<?php echo $pesquisado->id; ?>)" title="Deletar" data-id="<?php echo $pesquisado->id; ?>">
                             <img src="../imagens/del.png" title="Deletar" alt="Deletar">
                         </a>
-                        <a href="pesq-form.php?id=<?php echo $pesquisado->id; ?>" title="Editar">
+                        
+                        <a href="/abrir-formulario(<?php echo $pesquisado->id; ?>)" title="Editar" data-id="<?php echo $pesquisado->id; ?>">
                             <img src="../imagens/edit.png" title="Editar" alt="Editar">
                         </a>
                     </td>

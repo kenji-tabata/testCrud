@@ -18,9 +18,10 @@ class PesqMain {
             $pesquisados[$pesquisado->id] = $pesquisado;
         }
 
-        $this->pesquisados = $pesquisados;
-
         $conecta->close();
+        
+        return $pesquisados;
+
     }
 
     /**
@@ -34,14 +35,16 @@ class PesqMain {
         
         $pesquisado = $queryShow->fetch_object();
 
-        $this->pesquisado = $pesquisado;
-
         $queryShow->free();
         $conecta->close();
+        
+        $this->pesquisado = $pesquisado;
+
     }
 
     /**
      * Insert ou Update do pesquisado
+     * 
      * @param type $status
      * @param type $oculto
      * @param type $nome

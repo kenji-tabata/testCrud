@@ -5,11 +5,11 @@
  */
 include "../models/PesqMain.class.php";
 $pesqMain = new PesqMain;
-$pesqMain->listarPesq();
+
 
 /**
  * View
  */
 $view = new stdClass();
-$view->pesquisados = $pesqMain->pesquisados;
+$view->pesquisados = $pesqMain->listarPesq();
 require "../views/pesq-index.php";
