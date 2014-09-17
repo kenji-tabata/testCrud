@@ -19,7 +19,7 @@ class PesqMain {
         }
 
         $conecta->close();
-        
+
         return $pesquisados;
 
     }
@@ -27,24 +27,26 @@ class PesqMain {
     /**
      *  Recupera os dados para a editar do pesquisado
      */
-    function carregaPesq($idPesq) {
+    function carregarPesq($pesquisado) {
         require 'conexao.php';
-
-        $sqlShow = "SELECT id, nome, sexo, cpf, cargo, status, oculto FROM pesq_main WHERE id = $idPesq LIMIT 0,1";
+        $sqlShow = "SELECT id, nome, sexo, cpf, cargo, status, oculto FROM pesq_main WHERE id = {$pesquisado->id} LIMIT 0,1";
         $queryShow = $conecta->query($sqlShow);
-        
-        $pesquisado = $queryShow->fetch_object();
+        $_pesquisado = $queryShow->fetch_object();
+
+        $pesquisado->idPesq = $_pesquisado->idPesq;
+        $pesquisado->oculto = $_pesquisado->oculto;
+        $pesquisado->nome   = $_pesquisado->nome;
+        $pesquisado->sexo   = $_pesquisado->sexo;
+        $pesquisado->cpf    = $_pesquisado->cpf;
+        $pesquisado->cargo  = $_pesquisado->cargo;
 
         $queryShow->free();
         $conecta->close();
-        
-        $this->pesquisado = $pesquisado;
-
     }
 
     /**
      * Insert ou Update do pesquisado
-     * 
+     *
      * @param type $status
      * @param type $oculto
      * @param type $nome
@@ -74,7 +76,7 @@ class PesqMain {
             }
         }
 
-        # Executa a query SQL se nao ocorrer nenhum erro  
+        # Executa a query SQL se nao ocorrer nenhum erro
         if ($query->execute()) {
             $query->close();
         } else {

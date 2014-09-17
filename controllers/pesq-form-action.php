@@ -35,7 +35,7 @@ if ($validador->ehVazio($nome)) {
 /**
  * Valida o campo CPF
  */
-if ($validador->validaCPF($cpf)) {
+if (!$validador->validaCPF($cpf)) {
     $inputVazio[$qtdVazio]= "CPF";
     $qtdVazio += 1;
 }
@@ -74,6 +74,7 @@ elseif ($qtdVazio == 0) {
 else {
     # Inicia uma sessão para gravar a mensagem de erro
     session_start("errorLog");
+    # Variável da sessão recebe a frase construida pela função camposVazios
     $_SESSION["msgErro"] = $validador->camposVazios($qtdVazio,$inputVazio);
     header('location: pesq-form.php');
 }

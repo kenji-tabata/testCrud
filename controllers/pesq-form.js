@@ -1,18 +1,8 @@
-/**
- * Recebe como parametro o idBlock e atribui ao elemento o display:block (Torna visivel o elemento)
- * Recebe como parametro o idLink e muda a funcao do onclick do elemento
- * @param {type} idBlock
- * @param {type} idLink
- * @returns {undefined}
- */
-function mostrar(idBlock,idLink){
-    document.getElementById(idBlock).style.display="block";
-    if(tipo1 == "contato"){
-        document.getElementById(idLink).setAttribute('onclick', 'esconder("contato","btnContato")');
-    }else{
-        document.getElementById(idLink).setAttribute('onclick', 'esconder("empresa","btnEmpresa")');
-    }
-}
+$(document).ready(function () {
+   $("#btnContato").click(function (event){
+       $("#idBlock").show(2000);
+   });
+});
 
 /**
  * Recebe como parametro o idBlock e atribui ao elemento o display:none (Esconde o elemento)
