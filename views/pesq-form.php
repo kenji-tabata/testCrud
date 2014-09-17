@@ -1,11 +1,3 @@
-<?php include '../includes/topo.php'; ?>
-<div id="content_main">
-    <nav>
-        <ul>
-            <li><a href="pesq-form.php">Inserir pesquisado</a></li>
-            <li><a href="pesq-index.php">Listar pesquisado</a></li>
-        </ul>
-    </nav>
     <section id="cadastro">
  <!--onsubmit="return validar(this);"-->
         <h1><?php echo ($idPesq) ? "Alterar Pesquisado" : "Inserir Pesquisados"; ?></h1>
@@ -85,9 +77,5 @@
             </fieldset>
         </form>
     </section>
-</div>
 
 <script type="text/javascript" src="pesq-form.js"></script>
-
-<?php
-include '../includes/rodape.php';

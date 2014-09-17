@@ -2,8 +2,8 @@
 <div id="content_main">
     <nav>
         <ul>
-            <li><a href="pesq-form.php">Inserir pesquisado</a></li>
-            <li><a href="pesq-index.php">Listar pesquisado</a></li>
+            <li><a href="pesq-form.php" title="Inserir">Inserir pesquisado</a></li>
+            <li><a href="pesq-index.php" title="Listar">Listar pesquisado</a></li>
         </ul>
     </nav>
     <section id="index">
