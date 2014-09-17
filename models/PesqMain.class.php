@@ -2,6 +2,8 @@
 /**
  * Model do pesquisado - manipulacao dos registros
  */
+require_once "Pesquisado.class.php";
+
 class PesqMain {
 
     /**
@@ -33,7 +35,7 @@ class PesqMain {
         $queryShow = $conecta->query($sqlShow);
         $_pesquisado = $queryShow->fetch_object();
 
-        $pesquisado->idPesq = $_pesquisado->idPesq;
+        $pesquisado->idPesq = $_pesquisado->id;
         $pesquisado->oculto = $_pesquisado->oculto;
         $pesquisado->nome   = $_pesquisado->nome;
         $pesquisado->sexo   = $_pesquisado->sexo;

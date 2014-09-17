@@ -1,4 +1,5 @@
 <?php
+require "../models/Pesquisado.class.php";
 
 /**
  * Abrir formulário de pesquisa
@@ -12,7 +13,7 @@ if ($idPesq) {
     # Inicializando variaveis
     $urlAction = "../controllers/pesq-form-action.php?id=$idPesq";
 
-    $pesquisado = new Pesquisado();
+    $pesquisado = new Pesquisado($idPesq);
 
     require "../models/PesqMain.class.php";
     $pesqMain = new PesqMain;
@@ -26,12 +27,6 @@ else {
     $urlAction = "../controllers/pesq-form-action.php";
 
     $pesquisado = new Pesquisado();
-//    $pesquisado->idPesq = null;
-//    $pesquisado->oculto = 0;
-//    $pesquisado->nome = "";
-//    $pesquisado->sexo = "M";
-//    $pesquisado->cpf = "";
-//    $pesquisado->cargo = "";
     
 }
 
