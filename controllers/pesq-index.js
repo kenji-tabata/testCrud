@@ -28,7 +28,7 @@ $(document).ready(function () {
         var section = $('#index');
         var id = $(this).attr("data-id");
         
-        $.post("pesq-form.php", "id=" + id, function(html) {
+        $.post("Pesquisado.php", "ac=form-update&id=" + id, function(html) {
             section.fadeOut("slow", function () {
                 section.remove();
                 $('body').append(html);
@@ -43,7 +43,7 @@ $(document).ready(function () {
 
         var section = $('#index');
 
-        $.post("pesq-form.php", function(html) {
+        $.post("Pesquisado.php", "ac=form-insert", function(html) {
            section.fadeOut ("slow", function () {
                 section.remove();
                 $('body').append(html);
@@ -52,4 +52,19 @@ $(document).ready(function () {
                 alert(error);
         });  
     });
+    
+//    $("a[title='Listar']").click(function (event) {
+//        event.preventDefault();
+//
+//        var section = $('#index');
+//
+//        $.post("Pesquisado.php", "ac=listar", function(html) {
+//           section.fadeOut ("slow", function () {
+//                section.remove();
+//                $('body').append(html);
+//            });
+//        }).fail(function(error) {
+//                alert(error);
+//        });  
+//    });
 });

@@ -6,7 +6,6 @@
 include "../models/PesqMain.class.php";
 $pesqMain = new PesqMain;
 
-
 /**
  * View
  */

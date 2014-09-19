@@ -6,6 +6,37 @@ require "../models/PesqMain.class.php";
 $acao = isset($_POST['ac']) ? $_POST['ac'] : null;
 
 switch ($acao) {
+    case "form-insert":
+        $idPesq = isset($_POST['id']) ? $_POST['id'] : null;
+        
+        $urlAction = "../controllers/pesq-form-action.php";
+
+        $pesquisado = new Pesquisado();
+        $view = new stdClass();
+        $view->pesquisado = $pesquisado;
+        $view->urlAction  = $urlAction;
+        $view->msgErro    = "";
+
+        require "../views/pesq-form.php";
+        break;
+    
+    case "form-update":
+        $idPesq = isset($_POST['id']) ? $_POST['id'] : null;
+        
+        $urlAction = "../controllers/pesq-form-action.php?id=$idPesq";
+        $pesquisado = new Pesquisado($idPesq);
+
+        $pesqMain = new PesqMain;
+        $pesqMain->carregarPesq($pesquisado);
+        
+        $view = new stdClass();
+        $view->pesquisado = $pesquisado;
+        $view->urlAction  = $urlAction;
+        $view->msgErro    = "";
+
+        require "../views/pesq-form.php";
+        break;
+
     case "validar":
         
         $pesq_request = isset($_POST['pesq']) ? $_POST['pesq'] : null;
@@ -79,5 +110,6 @@ switch ($acao) {
         break;
 
     default:
+        echo "Sem ação em controllers/Pesquisado";
         break;
 }

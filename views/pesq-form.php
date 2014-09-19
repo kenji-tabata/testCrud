@@ -1,5 +1,4 @@
     <section id="index">
- <!--onsubmit="return validar(this);"-->
         <h1><?php echo ($idPesq) ? "Alterar Pesquisado" : "Inserir Pesquisados"; ?></h1>
 
         <form name="form" id="form" action="<?php echo $view->urlAction ?>" method="post">
