@@ -1,10 +1,11 @@
-    <section id="cadastro">
+    <section id="index">
  <!--onsubmit="return validar(this);"-->
         <h1><?php echo ($idPesq) ? "Alterar Pesquisado" : "Inserir Pesquisados"; ?></h1>
 
         <form name="form" id="form" action="<?php echo $view->urlAction ?>" method="post">
             <fieldset>
                 <legend>Dados Pessoais</legend>
+                <input type="hidden" value="<?php echo $pesquisado->id?>" id="id"/>
                 <p><?php echo $view->msgErro; ?></p>
                 <div class="rotulo"><label for="oculto">Oculto: </label></div>
                 <div class="entrada">
@@ -18,7 +19,8 @@
                 <div class="rotulo"><label for="nome">Nome: </label></div>
                 <div class="entrada">
                     <input type="text" id="nome" name="nome" placeholder="Nome completo" 
-                           value="<?php echo $view->pesquisado->nome; ?>"/></div>
+                           value="<?php echo $view->pesquisado->nome; ?>"/>
+                </div>
                 <div class="rotulo">Sexo: </div>
                 <div class="entrada">
                     <label for="masc">
@@ -38,7 +40,7 @@
                            value="<?php echo $view->pesquisado->cargo; ?>"/></div>
             </fieldset>
             <fieldset>
-                <legend id="btnContato" class="toggle" onclick="mostrar('contato', 'btnContato');">Contatos Pessoais</legend>
+                <legend id="btnContato" class="toggle">Contatos Pessoais</legend>
                 <div id="contato" class="toggleDiv">
                     <div class="rotulo"><label for="nascimento">Data de Nascimento: </label></div>
                     <div class="entrada"><input type="date" id="nascimento" value=""/></div>
@@ -59,7 +61,7 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend id="btnEmpresa" class="toggle" onclick="mostrar('empresa', 'btnEmpresa');">Dados da Empresa</legend>
+                <legend id="btnEmpresa" class="toggle">Dados da Empresa</legend>
                 <div id="empresa" class="toggleDiv">
                     <div class="rotulo"><label for="formacao">Formação Acadêmica: </label></div>
                     <div class="entrada"><input type="text" id="formacao" placeholder="Grau de Estudo" value=""/></div>

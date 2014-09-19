@@ -1,6 +1,6 @@
 <?php
 /**
- * Model do pesquisado - manipulacao dos registros
+ * Gateway
  */
 require_once "Pesquisado.class.php";
 
@@ -49,21 +49,22 @@ class PesqMain {
     /**
      * Insert ou Update do pesquisado
      *
-     * @param type $status
-     * @param type $oculto
-     * @param type $nome
-     * @param type $sexo
-     * @param type $cpf
-     * @param type $cargo
      */
-    function salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo) {
+    function salvarPesq($pesq_request) {
         require 'conexao.php';
-
         # Se o id do pesquisado existir atualiza o registro
-        if ($_GET['id']) {
+        if ($pesq_request->id) {
             $sql = "UPDATE pesq_main SET status= ?, oculto= ?, nome= ?, sexo= ?, cpf= ?, cargo= ? WHERE id= ?";
             if ($query = $conecta->prepare($sql)) {
-                $query->bind_param("ssssssi", $status, $oculto, $nome, $sexo, $cpf, $cargo, $_GET['id']);
+                $query->bind_param("ssssssi", 
+                        $pesq_request->status, 
+                        $pesq_request->oculto, 
+                        $pesq_request->nome, 
+                        $pesq_request->sexo, 
+                        $pesq_request->cpf, 
+                        $pesq_request->cargo, 
+                        $pesq_request->id
+                    );
             } else {
                 die("Nao foi possivel atualizar o pesquisado!");
             }
@@ -72,7 +73,14 @@ class PesqMain {
         else {
             $sql = "INSERT INTO pesq_main (status,oculto,nome,sexo,cpf,cargo) values (?, ?, ?, ?, ?, ?)";
             if ($query = $conecta->prepare($sql)) {
-                $query->bind_param("ssssss", $status, $oculto, $nome, $sexo, $cpf, $cargo);
+                $query->bind_param("ssssss", 
+                        $pesq_request->status, 
+                        $pesq_request->oculto, 
+                        $pesq_request->nome, 
+                        $pesq_request->sexo, 
+                        $pesq_request->cpf, 
+                        $pesq_request->cargo
+                );
             } else {
                 die("Nao foi possivel adicionar o pesquisado!");
             }
@@ -82,7 +90,7 @@ class PesqMain {
         if ($query->execute()) {
             $query->close();
         } else {
-            die("Nao foi possivel executar o servico!");
+            die("Nao foi possivel executar o servico 2!");
         }
 
         $conecta->close();
@@ -97,7 +105,7 @@ class PesqMain {
         $sqlDelete = "DELETE FROM pesq_main WHERE id = ?";
 
         if ($queryDelete = $conecta->prepare($sqlDelete)) {
-            $queryDelete->bind_param("i", $_GET['id']);
+            $queryDelete->bind_param("i", $_POST['id']);
 
             if ($queryDelete->execute()) {
                 $queryDelete->close();

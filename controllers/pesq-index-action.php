@@ -4,8 +4,7 @@
 /**
  * DELETE
  */
-if (isset($_GET['id'])) {
-    
+if (isset($_POST['id'])) {
     include "../models/PesqMain.class.php";
     $pesqMain = new PesqMain;
     $pesqMain->deletarPesq();
@@ -13,6 +12,6 @@ if (isset($_GET['id'])) {
     echo json_encode(array(
         'operação' => "delete",
         'concluida' => "ok",
-        'pesquisado deletado' => $_GET['id']
+        'pesquisado deletado' => $_POST['id']
     ));
 }

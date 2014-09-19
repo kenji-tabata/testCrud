@@ -5,14 +5,12 @@ require "../models/Pesquisado.class.php";
  * Abrir formulário de pesquisa
  * UPDATE ou INSERT
  */
-$idPesq = isset($_GET['id']) ? $_GET['id'] : null;
+$idPesq = isset($_POST['id']) ? $_POST['id'] : null;
 
 # Update
 if ($idPesq) {
-
     # Inicializando variaveis
     $urlAction = "../controllers/pesq-form-action.php?id=$idPesq";
-
     $pesquisado = new Pesquisado($idPesq);
 
     require "../models/PesqMain.class.php";

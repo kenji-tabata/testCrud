@@ -6,75 +6,47 @@
  * e mostra erros
  */
 
-# Atribui os dados do pesquisado pelo metodo POST
-$oculto = isset($_POST['oculto']) ? $_POST['oculto'] : null;
-$nome   = isset($_POST['nome'])   ? $_POST['nome'] : null;
-$sexo   = isset($_POST['sexo'])   ? $_POST['sexo'] : null;
-$cpf    = isset($_POST['cpf'])    ? $_POST['cpf'] : null;
-$cargo  = isset($_POST['cargo'])  ? $_POST['cargo'] : null;
-
-# Define STATUS do formulário do pesquisado como Não preenchido
-$status = "Não preenchido";
-
-# Inicializa as variáveis da mensagem de erro
-$qtdVazio = 0;
-$inputVazio = null;
-
-# Instância o objeto validador
-require "../models/Validador.class.php";
-$validador = new Validador;
-
-/**
- * Valida o campo Nome
- */
-if ($validador->ehVazio($nome)) {
-    $inputVazio[$qtdVazio] = "Nome";
-    $qtdVazio += 1;
-}
-
-/**
- * Valida o campo CPF
- */
-if (!$validador->validaCPF($cpf)) {
-    $inputVazio[$qtdVazio]= "CPF";
-    $qtdVazio += 1;
-}
-
-/**
- * Valida o campo Cargo
- */
-if ($validador->ehVazio($cargo)) {
-    $inputVazio[$qtdVazio] = "Cargo";
-    $qtdVazio += 1;
-}
-
-# Instancia o objeto pesquisado
+require "../models/Pesquisado.class.php";
 require "../models/PesqMain.class.php";
-$pesqMain = new PesqMain;
 
-/**
- * update
- */
-if ($qtdVazio == 0 && isset($_GET['id'])) {
-    $pesqMain->salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo);
-    header('location: ../controllers/pesq-index.php');
+$pesq_request = isset($_POST['pesq']) ? $_POST['pesq'] : null;
+$pesq_request = json_decode($pesq_request);
+
+$pesquisado = new Pesquisado();
+$pesquisado->id     = $pesq_request->id;
+$pesquisado->nome   = $pesq_request->nome;
+$pesquisado->oculto = $pesq_request->oculto;
+$pesquisado->sexo   = $pesq_request->sexo;
+$pesquisado->cpf    = $pesq_request->cpf;
+$pesquisado->cargo  = $pesq_request->cargo;
+$pesquisado->status = "Não preenchido";
+
+$pesqMain   = new PesqMain();
+
+$resp = $pesquisado->validarParaInsertUpdate();
+
+# Se validou...
+if (count($resp['campos']) == 0){
+    # update
+    if($pesquisado->id) {
+        $pesqMain->salvarPesq($pesquisado);
+//        die("update");
+    }
+    # insert
+    else {
+        $pesqMain->salvarPesq($pesquisado);
+//        die("insert");
+    } 
+    
 }
-
-/**
- * insert
- */
-elseif ($qtdVazio == 0) {
-    $pesqMain->salvarPesq($status, $oculto, $nome, $sexo, $cpf, $cargo);
-    header('location: ../controllers/pesq-index.php');
-}
-
-/**
- * Erros
- */
+# mostra os erros...
 else {
+    
     # Inicia uma sessão para gravar a mensagem de erro
     session_start("errorLog");
     # Variável da sessão recebe a frase construida pela função camposVazios
-    $_SESSION["msgErro"] = $validador->camposVazios($qtdVazio,$inputVazio);
-    header('location: pesq-form.php');
+//    $_SESSION["msgErro"] = $validador->camposVazios($resp, $inputVazio="mensagem de erro");
+    $_SESSION["msgErro"] = "";
+    die("erro");
+//    header('location: pesq-form.php');
 }
