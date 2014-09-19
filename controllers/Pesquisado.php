@@ -39,4 +39,14 @@ if (count($resp['campos']) == 0){
     } 
     
 }
-echo "ops! não fez nada!";
+# mostra os erros...
+else {
+    
+    # Inicia uma sessão para gravar a mensagem de erro
+    session_start("errorLog");
+    # Variável da sessão recebe a frase construida pela função camposVazios
+//    $_SESSION["msgErro"] = $validador->camposVazios($resp, $inputVazio="mensagem de erro");
+    $_SESSION["msgErro"] = "";
+    die("erro");
+//    header('location: pesq-form.php');
+}

@@ -37,13 +37,6 @@ $view->pesquisado = $pesquisado;
 $view->urlAction  = $urlAction;
 $view->msgErro    = "";
 
-# Inicia uma sessão para gravar a mensagem de erro
-session_start("errorLog");
 
-# Caso a sessão existir atribui ao $view->msgErro o valor da $_SESSION["msgErro"]
-if($_SESSION){
-    $view->msgErro = $_SESSION["msgErro"];
-    unset($_SESSION["msgErro"]);
-}
 require "../views/pesq-form.php";
 ?>
