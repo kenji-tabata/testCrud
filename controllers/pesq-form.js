@@ -1,8 +1,6 @@
 $(document).ready(function () {
-    $("#btnContato").click(function (event) {
-        $("#idBlock").show(2000);
-    });
-
+    
+    // Eventos do formulário
     $("form").submit(function (event) {
         event.preventDefault();
 
@@ -17,46 +15,39 @@ $(document).ready(function () {
         };
         
         // validar
-        $.post("pesq-form-action-validar.php", "pesq=" + JSON.stringify(objPesquisado), function (resposta_do_ajax) {
+        $.post("Pesquisado.php", "ac=validar&pesq=" + JSON.stringify(objPesquisado), function (resposta_do_ajax) {
             console.log(resposta_do_ajax);
             
-            // Insert / Update
-            $.post("pesq-form-action.php", "pesq=" + JSON.stringify(objPesquisado), function (resp) {
-                console.log(resp);
-            }).fail(function (ajaxError) {
-                alert(ajaxError);
-            });            
-
+            // Update
+            if(id){
+                $.post("Pesquisado.php", "ac=update&pesq=" + JSON.stringify(objPesquisado), function (resp) {
+                    console.log(resp);
+                }).fail(function (ajaxError) {
+                    alert(ajaxError);
+                });
+            }
+            
+            // Insert
+            else {
+                $.post("Pesquisado.php", "ac=insert&pesq=" + JSON.stringify(objPesquisado), function (resp) {
+                    console.log(resp);
+                }).fail(function (ajaxError) {
+                    alert(ajaxError);
+                });
+            }
         }).fail(function (phpError) {
             alert(phpError);
         });
-
-
     });
-
-
+    
+    // esconde o elemento html
+    $(".toggleDiv").hide();
+    // torna visível o elemento html
+    $(".toggle").click(function (event) {
+        event.preventDefault();
+        $(this).next(".toggleDiv").toggle("slow");
+    });
 });
-
-/**
- * Recebe como parametro o idBlock e atribui ao elemento o display:none (Esconde o elemento)
- * Recebe como parametro o idLink e muda a funcao do onclick do elemento
- * 
- * @param {type} idBlock
- * @param {type} idLink
- * @returns {undefined}
- */
-function esconder(idBlock, idLink) {
-    document.getElementById(idBlock).style.display = "none";
-    if (tipo1 == "contato") {
-        document.getElementById(idLink).setAttribute('onclick', 'mostrar("contato","btnContato")');
-    } else {
-        document.getElementById(idLink).setAttribute('onclick', 'mostrar("empresa","btnEmpresa")');
-    }
-}
-
-
-
-
 ///**
 // * Valida os campos do formulario do pesquisado com JavaScript
 // * @param {type} cadastro

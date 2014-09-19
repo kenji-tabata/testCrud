@@ -11,20 +11,15 @@ $(document).ready(function () {
         var linha = $(this).parent().parent();
         var id = $(this).attr("data-id");
 
-        $.post("pesq-index-action.php","id=" + id,function () {
+        $.post("Pesquisado.php","ac=delete&id=" + id, function () {
             linha.fadeOut("slow", function () {
+                console.log(id);
                 // Remover linha
                 linha.remove();
             });
         }).fail(function(error) {
                 alert(error);
         });  
-
-        
-//        $.post("dec_eixo_x_action.php", parametros, function() {})
-//            .fail(function(error) {
-//                alert(error);
-//            });        
     });
 
     $("a[title='Editar']").click(function (event) {

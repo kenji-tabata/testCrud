@@ -65,8 +65,10 @@ class PesqMain {
                         $pesq_request->cargo, 
                         $pesq_request->id
                     );
+                echo "Pesquisado atualizado com sucesso";
             } else {
-                die("Nao foi possivel atualizar o pesquisado!");
+                echo "Nao foi possivel atualizar o pesquisado!";
+                die();
             }
         }
         # Caso o id do pesquisado nao existir insira um novo registro
@@ -81,8 +83,10 @@ class PesqMain {
                         $pesq_request->cpf, 
                         $pesq_request->cargo
                 );
+                echo "Pesquisado adicionado com sucesso";
             } else {
-                die("Nao foi possivel adicionar o pesquisado!");
+                echo "Nao foi possivel adicionar o pesquisado!";
+                die();
             }
         }
 
@@ -101,15 +105,16 @@ class PesqMain {
      */
     function deletarPesq() {
         require 'conexao.php';
-
+        $id_pesq = $_POST['id'];
+        
         $sqlDelete = "DELETE FROM pesq_main WHERE id = ?";
 
         if ($queryDelete = $conecta->prepare($sqlDelete)) {
-            $queryDelete->bind_param("i", $_POST['id']);
+            $queryDelete->bind_param("i", $id_pesq);
 
             if ($queryDelete->execute()) {
                 $queryDelete->close();
-                header('location: ../controllers/pesq-index.php');
+                echo "Pesquisado deletado com sucesso!";
             } else {
                 die("Nao foi possivel deletar o usuario.");
             }

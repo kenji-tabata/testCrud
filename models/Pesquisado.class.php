@@ -3,6 +3,10 @@
 /**
  * Domain
  */
+
+# Instância o objeto validador
+require "../models/Validador.class.php";
+
 class Pesquisado {
 
     function __construct($id = null) {
@@ -16,8 +20,6 @@ class Pesquisado {
 
     function validarParaInsertUpdate() {
 
-        # Instância o objeto validador
-        require "../models/Validador.class.php";
         $validador = new Validador;
 
         # inicializando "resp"
