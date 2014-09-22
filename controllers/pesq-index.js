@@ -11,7 +11,7 @@ $(document).ready(function () {
         var linha = $(this).parent().parent();
         var id = $(this).attr("data-id");
 
-        $.post("Pesquisado.php","ac=delete&id=" + id, function () {
+        $.post("controllers/Pesquisado.php","ac=delete&id=" + id, function () {
             linha.fadeOut("slow", function () {
                 console.log(id);
                 // Remover linha
@@ -28,7 +28,7 @@ $(document).ready(function () {
         var section = $('#index');
         var id = $(this).attr("data-id");
         
-        $.post("Pesquisado.php", "ac=form-update&id=" + id, function(html) {
+        $.post("controllers/Pesquisado.php", "ac=form-update&id=" + id, function(html) {
             section.fadeOut("slow", function () {
                 section.remove();
                 $('body').append(html);
@@ -43,7 +43,7 @@ $(document).ready(function () {
 
         var section = $('#index');
 
-        $.post("Pesquisado.php", "ac=form-insert", function(html) {
+        $.post("controllers/Pesquisado.php", "ac=form-insert", function(html) {
            section.fadeOut ("slow", function () {
                 section.remove();
                 $('body').append(html);
@@ -53,18 +53,23 @@ $(document).ready(function () {
         });  
     });
     
-//    $("a[title='Listar']").click(function (event) {
-//        event.preventDefault();
-//
-//        var section = $('#index');
-//
-//        $.post("Pesquisado.php", "ac=listar", function(html) {
-//           section.fadeOut ("slow", function () {
-//                section.remove();
-//                $('body').append(html);
-//            });
-//        }).fail(function(error) {
-//                alert(error);
-//        });  
-//    });
+    $("a[title='Listar']").click(function (event) {
+        event.preventDefault();
+
+        var section = $('#index');
+        var script = $('#index-js');
+
+        $.post("controllers/Pesquisado.php", "ac=list", function(html) {
+           section.fadeOut ("slow", function () {
+                section.remove();
+                script.remove();
+                $('body').append(html);
+            });
+        }).fail(function(error) {
+                alert(error);
+        });  
+    });
+    
+    $
+    
 });

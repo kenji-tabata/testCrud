@@ -2,14 +2,23 @@
 
 require "../models/Pesquisado.class.php";
 require "../models/PesqMain.class.php";
+require_once "../models/Validador.class.php";
 
 $acao = isset($_POST['ac']) ? $_POST['ac'] : null;
 
 switch ($acao) {
+    case "list":
+        $pesqMain = new PesqMain;
+
+        $view = new stdClass();
+        $view->pesquisados = $pesqMain->listarPesq();
+        require "../views/pesq-index.php";
+        break;
+        
     case "form-insert":
         $idPesq = isset($_POST['id']) ? $_POST['id'] : null;
         
-        $urlAction = "../controllers/pesq-form-action.php";
+        $urlAction = "controllers/pesq-form-action.php";
 
         $pesquisado = new Pesquisado();
         $view = new stdClass();
@@ -23,7 +32,7 @@ switch ($acao) {
     case "form-update":
         $idPesq = isset($_POST['id']) ? $_POST['id'] : null;
         
-        $urlAction = "../controllers/pesq-form-action.php?id=$idPesq";
+        $urlAction = "controllers/pesq-form-action.php?id=$idPesq";
         $pesquisado = new Pesquisado($idPesq);
 
         $pesqMain = new PesqMain;
@@ -73,6 +82,9 @@ switch ($acao) {
         if (count($resp['campos']) == 0){
             $pesqMain->salvarPesq($pesquisado);
         } else {
+            $validador = new Validador();
+            $erros = json_encode($resp);
+            $validador->camposVazios($erros);            
             echo "Mensagem de Erro";
         }
         break;
@@ -98,6 +110,7 @@ switch ($acao) {
         if (count($resp['campos']) == 0){
             $pesqMain->salvarPesq($pesquisado);
         } else {
+            var_dump($resp);
             echo "Menssagem de Erro";
         }
         break;

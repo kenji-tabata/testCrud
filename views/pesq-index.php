@@ -1,11 +1,3 @@
-<?php include '../includes/topo.php'; ?>
-<div id="content_main">
-    <nav>
-        <ul>
-            <li><a href="pesq-form.php" title="Inserir">Inserir pesquisado</a></li>
-            <li><a href="pesq-index.php" title="Listar">Listar pesquisado</a></li>
-        </ul>
-    </nav>
     <section id="index">
         <h1>Listar Pesquisados</h1>
         <table border="1px">
@@ -30,21 +22,15 @@
                     <td><?php echo ($pesquisado->oculto == 0) ? "Não" : "Sim"; ?></td>
                     <td>
                         <a href="/deletar(<?php echo $pesquisado->id; ?>)" title="Deletar" data-id="<?php echo $pesquisado->id; ?>">
-                            <img src="../imagens/del.png" title="Deletar" alt="Deletar">
+                            <img src="imagens/del.png" title="Deletar" alt="Deletar">
                         </a>
                         
                         <a href="/abrir-formulario(<?php echo $pesquisado->id; ?>)" title="Editar" data-id="<?php echo $pesquisado->id; ?>">
-                            <img src="../imagens/edit.png" title="Editar" alt="Editar">
+                            <img src="imagens/edit.png" title="Editar" alt="Editar">
                         </a>
                     </td>
                 </tr>
             <?php endforeach ?>
         </table>
     </section>
-</div>
-
-<script type="text/javascript" src="../controllers/pesq-index.js"></script>
-
-<?php
-include '../includes/rodape.php';
-
+<script id="index-js" type="text/javascript" src="controllers/pesq-index.js"></script>

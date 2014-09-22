@@ -15,12 +15,12 @@ $(document).ready(function () {
         };
         
         // validar
-        $.post("Pesquisado.php", "ac=validar&pesq=" + JSON.stringify(objPesquisado), function (resposta_do_ajax) {
+        $.post("controllers/Pesquisado.php", "ac=validar&pesq=" + JSON.stringify(objPesquisado), function (resposta_do_ajax) {
             console.log(resposta_do_ajax);
             
             // Update
-            if(id){
-                $.post("Pesquisado.php", "ac=update&pesq=" + JSON.stringify(objPesquisado), function (resp) {
+            if($('#id').val()){
+                $.post("controllers/Pesquisado.php", "ac=update&pesq=" + JSON.stringify(objPesquisado), function (resp) {
                     console.log(resp);
                 }).fail(function (ajaxError) {
                     alert(ajaxError);
@@ -29,7 +29,7 @@ $(document).ready(function () {
             
             // Insert
             else {
-                $.post("Pesquisado.php", "ac=insert&pesq=" + JSON.stringify(objPesquisado), function (resp) {
+                $.post("controllers/Pesquisado.php", "ac=insert&pesq=" + JSON.stringify(objPesquisado), function (resp) {
                     console.log(resp);
                 }).fail(function (ajaxError) {
                     alert(ajaxError);

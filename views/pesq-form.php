@@ -79,4 +79,4 @@
         </form>
     </section>
 
-<script type="text/javascript" src="pesq-form.js"></script>
+<script type="text/javascript" src="controllers/pesq-form.js"></script>
