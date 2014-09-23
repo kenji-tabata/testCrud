@@ -7,23 +7,15 @@ require_once "../models/Validador.class.php";
 $acao = isset($_POST['ac']) ? $_POST['ac'] : null;
 
 switch ($acao) {
-    case "list":
-        $pesqMain = new PesqMain;
-
-        $view = new stdClass();
-        $view->pesquisados = $pesqMain->listarPesq();
-        require "../views/pesq-index.php";
-        break;
-        
+      
     case "form-insert":
-        $idPesq = isset($_POST['id']) ? $_POST['id'] : null;
+        $idPesq = null;
         
-        $urlAction = "controllers/pesq-form-action.php";
-
         $pesquisado = new Pesquisado();
+        
         $view = new stdClass();
         $view->pesquisado = $pesquisado;
-        $view->urlAction  = $urlAction;
+        $view->urlAction  = "controllers/pesq-form-action.php";
         $view->msgErro    = "";
 
         require "../views/pesq-form.php";
@@ -32,7 +24,6 @@ switch ($acao) {
     case "form-update":
         $idPesq = isset($_POST['id']) ? $_POST['id'] : null;
         
-        $urlAction = "controllers/pesq-form-action.php?id=$idPesq";
         $pesquisado = new Pesquisado($idPesq);
 
         $pesqMain = new PesqMain;
@@ -40,7 +31,7 @@ switch ($acao) {
         
         $view = new stdClass();
         $view->pesquisado = $pesquisado;
-        $view->urlAction  = $urlAction;
+        $view->urlAction  = "controllers/pesq-form-action.php?id={$pesquisado->id}";
         $view->msgErro    = "";
 
         require "../views/pesq-form.php";
@@ -62,6 +53,16 @@ switch ($acao) {
         echo json_encode($resp);        
         break;
 
+    # Read
+    case "list":
+        $pesqMain = new PesqMain;
+
+        $view = new stdClass();
+        $view->pesquisados = $pesqMain->listarPesq();
+        require "../views/pesq-index.php";
+        break;
+
+    # Create
     case "insert":
         
         $pesq_request = isset($_POST['pesq']) ? $_POST['pesq'] : null;
@@ -88,7 +89,8 @@ switch ($acao) {
             echo "Mensagem de Erro";
         }
         break;
-
+        
+    # Update
     case "update":
         
         $pesq_request = isset($_POST['pesq']) ? $_POST['pesq'] : null;
@@ -115,6 +117,7 @@ switch ($acao) {
         }
         break;
 
+    # Delete
     case "delete":
         $pesq_id = isset($_POST['id']);
         
