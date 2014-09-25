@@ -29,17 +29,30 @@ class ValidatorTest extends PHPUnit_Framework_Testcase {
         $this->assertEquals(false, $validator->validaCPF(""));
     }
 
-    function testeCampoVazio1() {
+    function testeValidaData(){
         $validator = new Validador();
-
-        $msg = "O campo nome não foi preenchido ou está preenchido de forma incorreta.";
-        $this->assertEquals($msg, $validator->camposVazios(1, ["nome"]));
-
-        $msg = "Os campos nome e cpf não foram preenchidos ou estão preenchidos de forma incorreta.";
-        $this->assertEquals($msg, $validator->camposVazios(2, ["nome", "cpf"]));
-
-        $msg = "Os campos nome, cpf e cargo não foram preenchidos ou estão preenchidos de forma incorreta.";
-        $this->assertEquals($msg, $validator->camposVazios(3, ["nome", "cpf", "cargo"]));
+        
+        $this->assertEquals(true, $validator->validaData("10/10/1900"));
+        $this->assertEquals(true, $validator->validaData("1900-10-20"));
     }
+    
+    function testeValidaCep(){
+        $validator = new Validador();
+        
+        $this->assertEquals(true, $validator->validaCep("00000-000"));
+    }
+    
+//    function testeCampoVazio1() {
+//        $validator = new Validador();
+//
+//        $msg = "O campo nome não foi preenchido ou está preenchido de forma incorreta.";
+//        $this->assertEquals($msg, $validator->camposVazios(1, ["nome"]));
+//
+//        $msg = "Os campos nome e cpf não foram preenchidos ou estão preenchidos de forma incorreta.";
+//        $this->assertEquals($msg, $validator->camposVazios(2, ["nome", "cpf"]));
+//
+//        $msg = "Os campos nome, cpf e cargo não foram preenchidos ou estão preenchidos de forma incorreta.";
+//        $this->assertEquals($msg, $validator->camposVazios(3, ["nome", "cpf", "cargo"]));
+//    }
 
 }

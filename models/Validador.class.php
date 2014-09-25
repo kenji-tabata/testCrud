@@ -7,7 +7,7 @@ class Validador {
 
     /**
      * Verifica se o $input é vazio ou não
-     * 
+     *
      * @param type $input
      * @return boolean
      */
@@ -22,7 +22,7 @@ class Validador {
 
     /**
      * Verifica se é um formato de CPF válido
-     * 
+     *
      * @param type $input
      * @return boolean
      */
@@ -35,33 +35,79 @@ class Validador {
         }
     }
 
+//    function validaEmail($input) {
+//        # Se casar...
+//        if (preg_match("/^(([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}){0,1}$/", $input)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+    
+    function validaTel($input) {
+        # Se casar...
+        if (preg_match("^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^", $input)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function validaCel($input) {
+        # Se casar...
+        if (preg_match("^\(+[0-9]{2,3}\) [0-9]{5}-[0-9]{4}$^", $input)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+//    function validaData($input) {
+//        # Se casar...
+//        if (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $input)) {
+//            return true;
+//        } elseif(preg_match('/^\d{4}\-\d{1,2}\-\d{1,2}$/', $input)) {
+//            return true;
+//        } else{
+//            return false;
+//        }
+//    }
+    
+//    function validaCep($input) {
+//        # Se casar...
+//        if (preg_match('/^[0-9]{5}-[0-9]{3}$/', $input)) {
+//            return true;
+//        } else{
+//            return false;
+//        }
+//    }
+    
     /**
-     * Recebe a quantidade de campos vazios e seus repectiveis nomes para montar a mensagem de erro
+     * Recebe os campos que estão em branco e retorna uma mensagem
      */
-    function camposVazios($erros) {
-        $resp = json_decode($erros);
+    function camposVazios($emBranco) {
+        $resp = json_decode($emBranco);
         
-        var_dump($resp);
-//        # Caso a quantidade de campos vazio seja 1 retorna a mensagem no singular
-//        if ($qtdVazio == 1) {
-//            return "O campo " . $inputVazio[0] . " não foi preenchido ou está preenchido de forma incorreta.";
-//        }
-//        # Caso a quantidade de campos vazios seja maior que 1 retorna a mensagem no plural
-//        else {
-//            $inputs = $inputVazio[0];
-//            for ($erros = 1; $erros < $qtdVazio; $erros++) {
-//
-//                # Se o laço FOR for igual a quantidade de campos vazios -1, atribui o 'e' na concatenação do INPUTS
-//                if ($erros == $qtdVazio - 1) {
-//                    $inputs = $inputs . " e " . $inputVazio[$erros];
-//                }
-//                # Se o laço FOR for diferente a quantidade de campos vazios -1, atribui a ',' na concatenação do INPUTS
-//                else {
-//                    $inputs = $inputs . ", " . $inputVazio[$erros];
-//                }
-//            }
-//            return "Os campos $inputs não foram preenchidos ou estão preenchidos de forma incorreta.";
-//        }
+        # Se a quantidade de campos que esta em branco for 1, retorna a mensagem no singular
+        if(count($resp->campos) == 1){
+            return "O campo " . $resp->campos[0]->campo . " não foi preenchido ou está preenchido de forma incorreta.";
+        } 
+        # Se a quantidade de campos que estão em branco for maior que 1, retorna a mensagem no plural
+        else {
+            # Primeiro campo que esta em branco
+            $input = $resp->campos[0]->campo;
+            # Campos em brancos restantes
+            for ($e = 1; $e < count($resp->campos); $e++){
+                # Se for o penúltimo elemento coloca o " e " antes do último elemento 
+                if ($e == count($resp->campos) -1){
+                    $input = $input . " e " . $resp->campos[$e]->campo;
+                } 
+                # Se existir mais elementos coloca a ", " antes do próximo elemento
+                else {
+                    $input = $input . ", " . $resp->campos[$e]->campo;
+                }
+            }
+            return "Os campos $input não foram preenchidos ou estão preenchidos de forma incorreta!";
+        }
     }
 
 }

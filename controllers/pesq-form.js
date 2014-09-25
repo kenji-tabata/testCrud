@@ -22,7 +22,13 @@ $(document).ready(function () {
             if($('#id').val()){
                 $.post("controllers/Pesquisado.php", "ac=update&pesq=" + JSON.stringify(objPesquisado), 
                 function (resp) {
-                    console.log(resp);
+                    setTimeout( function (){
+                        $("#erro").fadeOut ("slow", function () {
+                            $("#erro").remove();
+                        });
+                    },5000);
+                    $("#erro").remove();
+                    $("#msgErro").append("<p id='erro'>"+ resp +"</p>");
                 }).fail(function (ajaxError) {
                     alert(ajaxError);
                 });
@@ -32,7 +38,13 @@ $(document).ready(function () {
             else {
                 $.post("controllers/Pesquisado.php", "ac=insert&pesq=" + JSON.stringify(objPesquisado), 
                 function (resp) {
-                    console.log(resp);
+                    setTimeout( function (){
+                        $("#erro").fadeOut ("slow", function () {
+                            $("#erro").remove();
+                        });
+                    },5000);
+                    $("#erro").remove();
+                    $("#msgErro").append("<p id='erro'>"+ resp +"</p>");
                 }).fail(function (ajaxError) {
                     alert(ajaxError);
                 });

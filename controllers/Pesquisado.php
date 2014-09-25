@@ -85,8 +85,8 @@ switch ($acao) {
         } else {
             $validador = new Validador();
             $erros = json_encode($resp);
-            $validador->camposVazios($erros);            
-            echo "Mensagem de Erro";
+            
+            echo $validador->camposVazios($erros);
         }
         break;
         
@@ -112,8 +112,9 @@ switch ($acao) {
         if (count($resp['campos']) == 0){
             $pesqMain->salvarPesq($pesquisado);
         } else {
-            var_dump($resp);
-            echo "Menssagem de Erro";
+            $validador = new Validador();
+            $erros = json_encode($resp);
+            $validador->camposVazios($erros);
         }
         break;
 

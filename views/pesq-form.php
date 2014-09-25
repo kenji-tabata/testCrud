@@ -5,7 +5,7 @@
             <fieldset>
                 <legend>Dados Pessoais</legend>
                 <input type="hidden" value="<?php echo $pesquisado->id?>" id="id"/>
-                <p><?php echo $view->msgErro; ?></p>
+                <div id="msgErro"></div>
                 <div class="rotulo"><label for="oculto">Oculto: </label></div>
                 <div class="entrada">
                     <label for="sim">
