@@ -1,4 +1,5 @@
     <section id="index">
+        <div id="msgErro"></div>
         <h1>Listar Pesquisados</h1>
         <table border="1px">
             <tr>
@@ -14,7 +15,7 @@
             <?php foreach ($view->pesquisados as $pesquisado): ?>
                 <tr>
                     <td><?php echo $pesquisado->id; ?></td>
-                    <td><?php echo $pesquisado->nome; ?></td>
+                    <td><a href="#<?php echo $pesquisado->nome; ?>" class="info"><?php echo $pesquisado->nome; ?></a></td>
                     <td><?php echo $pesquisado->sexo; ?></td>
                     <td><?php echo $pesquisado->cpf; ?></td>
                     <td><?php echo $pesquisado->cargo; ?></td>
