@@ -13,7 +13,7 @@ $(document).ready(function () {
             cargo: $("input[name='cargo']").val(),
             cpf: $("input[name='cpf']").val(),
             
-            // id_pesq: $("input[id_pesq").val(),
+            id_pesq: $("#id_pesq").val(),
             dt_nasc: $("input[name='dt_nasc']").val(),
             endereco: $("input[name='endereco']").val(),
             bairro: $("input[name='bairro']").val(),

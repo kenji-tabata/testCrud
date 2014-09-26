@@ -67,6 +67,10 @@ switch ($acao) {
         echo json_encode($resp);        
         break;
 
+    # Mais Informações
+    case "info":
+        
+        break;
     # Read
     case "list":
         $pesqMain = new PesqMain;
@@ -83,12 +87,28 @@ switch ($acao) {
         $pesq_request = json_decode($pesq_request);
 
         $pesquisado = new Pesquisado();
-        $pesquisado->nome   = $pesq_request->nome;
-        $pesquisado->oculto = $pesq_request->oculto;
-        $pesquisado->sexo   = $pesq_request->sexo;
-        $pesquisado->cpf    = $pesq_request->cpf;
-        $pesquisado->cargo  = $pesq_request->cargo;
-        $pesquisado->status = "Não preenchido";
+        $pesquisado->nome         = $pesq_request->nome;
+        $pesquisado->oculto       = $pesq_request->oculto;
+        $pesquisado->sexo         = $pesq_request->sexo;
+        $pesquisado->cpf          = $pesq_request->cpf;
+        $pesquisado->cargo        = $pesq_request->cargo;
+        $pesquisado->status       = "Não preenchido";
+        
+        $pesquisado->id_pesq      = $pesq_request->id_pesq;
+        $pesquisado->dt_nasc      = $pesq_request->dt_nasc;
+        $pesquisado->endereco     = $pesq_request->endereco;
+        $pesquisado->bairro       = $pesq_request->bairro;
+        $pesquisado->cidade       = $pesq_request->cidade;
+        $pesquisado->uf           = $pesq_request->uf;
+        $pesquisado->cep          = $pesq_request->cep;
+        $pesquisado->telefone_res = $pesq_request->telefone_res;
+        $pesquisado->telefone_cel = $pesq_request->telefone_cel;
+        $pesquisado->telefone_com = $pesq_request->telefone_com;
+        $pesquisado->email        = $pesq_request->email;
+        $pesquisado->formacao     = $pesq_request->formacao;
+        $pesquisado->empresa      = $pesq_request->empresa;
+        $pesquisado->dt_adm       = $pesq_request->dt_adm;
+        $pesquisado->dt_preen     = date("Y-m-d");
         
         $pesqMain   = new PesqMain();
 
@@ -110,14 +130,30 @@ switch ($acao) {
         $pesq_request = isset($_POST['pesq']) ? $_POST['pesq'] : null;
         $pesq_request = json_decode($pesq_request);
 
-        $pesquisado = new Pesquisado();
-        $pesquisado->id     = $pesq_request->id;
-        $pesquisado->nome   = $pesq_request->nome;
-        $pesquisado->oculto = $pesq_request->oculto;
-        $pesquisado->sexo   = $pesq_request->sexo;
-        $pesquisado->cpf    = $pesq_request->cpf;
-        $pesquisado->cargo  = $pesq_request->cargo;
-        $pesquisado->status = "Não preenchido";
+        $pesquisado               = new Pesquisado();
+        $pesquisado->id           = $pesq_request->id;
+        $pesquisado->nome         = $pesq_request->nome;
+        $pesquisado->oculto       = $pesq_request->oculto;
+        $pesquisado->sexo         = $pesq_request->sexo;
+        $pesquisado->cpf          = $pesq_request->cpf;
+        $pesquisado->cargo        = $pesq_request->cargo;
+        $pesquisado->status       = "preenchido";
+        
+        $pesquisado->id_pesq      = $pesq_request->id_pesq;
+        $pesquisado->dt_nasc      = $pesq_request->dt_nasc;
+        $pesquisado->endereco     = $pesq_request->endereco;
+        $pesquisado->bairro       = $pesq_request->bairro;
+        $pesquisado->cidade       = $pesq_request->cidade;
+        $pesquisado->uf           = $pesq_request->uf;
+        $pesquisado->cep          = $pesq_request->cep;
+        $pesquisado->telefone_res = $pesq_request->telefone_res;
+        $pesquisado->telefone_cel = $pesq_request->telefone_cel;
+        $pesquisado->telefone_com = $pesq_request->telefone_com;
+        $pesquisado->email        = $pesq_request->email;
+        $pesquisado->formacao     = $pesq_request->formacao;
+        $pesquisado->empresa      = $pesq_request->empresa;
+        $pesquisado->dt_adm       = $pesq_request->dt_adm;
+        $pesquisado->dt_preen     = date("Y-m-d");
         
         $pesqMain   = new PesqMain();
 
