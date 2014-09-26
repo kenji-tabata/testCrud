@@ -11,7 +11,23 @@ $(document).ready(function () {
             oculto: $("input[name='oculto']:checked").val(),
             sexo: $("input[name='sexo']:checked").val(),
             cargo: $("input[name='cargo']").val(),
-            cpf: $("input[name='cpf']").val()
+            cpf: $("input[name='cpf']").val(),
+            
+            // id_pesq: $("input[id_pesq").val(),
+            dt_nasc: $("input[name='dt_nasc']").val(),
+            endereco: $("input[name='endereco']").val(),
+            bairro: $("input[name='bairro']").val(),
+            cidade: $("input[name='cidade']").val(),
+            uf: $("input[name='uf']").val(),
+            cep: $("input[name='cep']").val(),
+            telefone_res: $("input[name='telefone_res']").val(),
+            telefone_cel: $("input[name='telefone_cel']").val(),
+            telefone_com: $("input[name='telefone_com']").val(),
+            email: $("input[name='email']").val(),
+            formacao: $("input[name='formacao']").val(),
+            empresa: $("input[name='empresa']").val(),
+            dt_adm: $("input[name='dt_adm']").val(),
+            dt_preen: $("input[name='dt_preen']").val()
         };
         
         // validar

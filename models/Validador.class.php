@@ -35,14 +35,14 @@ class Validador {
         }
     }
 
-//    function validaEmail($input) {
-//        # Se casar...
-//        if (preg_match("/^(([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}){0,1}$/", $input)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    function validaEmail($input) {
+        # Se casar...
+        if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     function validaTel($input) {
         # Se casar...
@@ -61,25 +61,25 @@ class Validador {
         }
     }
     
-//    function validaData($input) {
-//        # Se casar...
-//        if (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $input)) {
-//            return true;
-//        } elseif(preg_match('/^\d{4}\-\d{1,2}\-\d{1,2}$/', $input)) {
-//            return true;
-//        } else{
-//            return false;
-//        }
-//    }
+    function validaData($input) {
+        # Se casar...
+        if (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $input)) {
+            return true;
+        } elseif(preg_match('/^\d{4}\-\d{1,2}\-\d{1,2}$/', $input)) {
+            return true;
+        } else{
+            return false;
+        }
+    }
     
-//    function validaCep($input) {
-//        # Se casar...
-//        if (preg_match('/^[0-9]{5}-[0-9]{3}$/', $input)) {
-//            return true;
-//        } else{
-//            return false;
-//        }
-//    }
+    function validaCep($input) {
+        # Se casar...
+        if (preg_match('/^[0-9]{5}-[0-9]{3}$/', $input)) {
+            return true;
+        } else{
+            return false;
+        }
+    }
     
     /**
      * Recebe os campos que estão em branco e retorna uma mensagem
